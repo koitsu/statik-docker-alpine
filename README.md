@@ -74,10 +74,17 @@ Once you find one you like, you can generate the applicable CSS file using
 [their pygmentize program](https://pygments.org/docs/cmdline/#generating-styles)
 using the Docker container.
 
-The below selects the `monokai` visual style, names the CSS class `highlight`, and
-outputs the CSS to a file named `highlight.css` in your container directory:
+The below selects the `monokai` visual style, names the CSS class
+`highlight`, and outputs the CSS to the file `assets/highlight.css` in
+your site:
 
 ```
 $ cd my-site
-$ statikdocker pygmentize -S monokai -f html -a .highlight -o highlight.css
+$ statikdocker pygmentize -S monokai -f html -a .highlight -o assets/highlight.css
 ```
+
+Next, to get Statik to colourise your fenced code (in Markdown), see
+[thanethomson/statik/pull/46](https://github.com/thanethomson/statik/pull/46)
+for some configuration details.  To use the new CSS file, use the
+[asset Jinja2 template tag](https://github.com/thanethomson/statik/wiki/Jinja2-templates#-asset-relativepathtoassetjs-)
+in one of your `templates/` files as documented.
