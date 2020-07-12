@@ -39,7 +39,7 @@ $ docker build --rm -t statik-docker-alpine:latest .
 # Usage Examples
 
 ```
-$ cd my-statik-site
+$ cd my-site
 $ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app statik-docker-alpine:latest statik --help
 $ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app statik-docker-alpine:latest statik --quickstart
 $ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app -p 8000:8000 statik-docker-alpine:latest statik -w --host 0.0.0.0
@@ -62,5 +62,6 @@ The below selects the `monokai` visual style, names the CSS class `highlight`, a
 outputs the CSS to a file named `highlight.css` in your container directory:
 
 ```
+$ cd my-site
 $ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app statik-docker-alpine:latest pygmentize -S monokai -f html -a .highlight -o highlight.css
 ```
