@@ -38,6 +38,8 @@ $ docker build --rm -t statik-docker-alpine:latest .
 
 # Usage Examples
 
+## Convenience Script
+
 The below examples all use a simple wrapper script called `statikdocker`
 for convenience, and to make the examples shorter in width.  Be sure
 to `chmod u+x` the script and place it somewhere in your `$PATH`:
@@ -50,6 +52,8 @@ exec docker run --rm -it \
   -p 8000:8000 \
   statik-docker-alpine:latest $*
 ```
+
+## Common Usage
 
 ```
 $ cd my-site
