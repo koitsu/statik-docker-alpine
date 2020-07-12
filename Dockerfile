@@ -6,7 +6,7 @@ RUN set -e -x \
 && apk update \
 && apk add bash curl git libpq wget \
 && apk add --virtual build-deps build-base python3-dev libffi-dev openssl-dev postgresql-dev \
-&& PIP_NO_CACHE_DIR=1 pip3 install statik==0.23.0 \
+&& PIP_NO_CACHE_DIR=1 pip3 install statik==0.23.0 Pygments==2.6.1 \
 && apk del --purge build-deps \
 && rm -fr /var/cache/apk/*
 

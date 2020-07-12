@@ -12,7 +12,9 @@ I haven't taken the time to figure out how to get this onto DockerHub.  Sorry.
 * Container directory: `/app`
 * Container UID/GID: `1000:1000`
 * Container exposed TCP port: 8000
-* `bash`, `curl`, `git`, and `wget` are included to aid in troubleshooting
+* Additional programs: `bash`, `curl`, `git`, `wget`
+* Additional Python packages:
+  * [Pygments](https://pypi.org/project/Pygments/) 2.6.1 via PyPI
 
 The container should be run with non-root credentials (read: the container
 should be run as your own UID/GID), due to use of a volume map.  This ensures
@@ -33,6 +35,7 @@ $ cd statik-docker-alpine
 $ docker build --rm -t statik-docker-alpine:latest .
 ```
 
+
 # Usage Examples
 
 ```
@@ -42,4 +45,22 @@ $ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app statik-docker-alpine:lat
 $ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app -p 8000:8000 statik-docker-alpine:latest statik -w --host 0.0.0.0
 ^C
 $ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app statik-docker-alpine:latest bash
+```
+
+## Generating Pygments CSS Files
+
+Pygments has
+[many visual styles](https://github.com/pygments/pygments/tree/master/pygments/styles)
+to choose from when it comes to colourising source code in over 500
+programming languages.  You can see them by
+[using their demo site](https://pygments.org/demo/).
+Once you find one you like, you can generate the applicable CSS file using
+[their pygmentize program](https://pygments.org/docs/cmdline/#generating-styles)
+using the Docker container.
+
+The below selects the `monokai` visual style, names the CSS class `highlight`, and
+outputs the CSS to a file named `highlight.css` in your container directory:
+
+```
+$ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app statik-docker-alpine:latest pygmentize -S monokai -f html -a .highlight -o highlight.css
 ```
