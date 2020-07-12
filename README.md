@@ -80,7 +80,7 @@ your site:
 
 ```
 $ cd my-site
-$ statikdocker pygmentize -S monokai -f html -a .highlight -o assets/highlight.css
+$ statikdocker pygmentize -f html -S monokai -a .highlight > assets/highlight.css
 ```
 
 Next, to get Statik to colourise your fenced code (in Markdown), see
