@@ -39,8 +39,7 @@ $ docker build --rm -t statik-docker-alpine:latest .
 $ cd my-statik-site
 $ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app statik-docker-alpine:latest statik --help
 $ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app statik-docker-alpine:latest statik --quickstart
-$ cd blog
-$ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app -p 8000:8000 statik-docker-alpine:latest statik --host 0.0.0.0 --watch --no-browser
+$ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app -p 8000:8000 statik-docker-alpine:latest statik -w --host 0.0.0.0
 ^C
 $ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app statik-docker-alpine:latest bash
 ```
