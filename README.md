@@ -38,13 +38,25 @@ $ docker build --rm -t statik-docker-alpine:latest .
 
 # Usage Examples
 
+The below examples all use a simple wrapper script called `statikdocker`
+for convenience, and to make the examples shorter in width.  Be sure
+to `chmod u+x` the script and place it somewhere in your `$PATH`:
+
+```bash
+#!/bin/sh
+exec docker run --rm -it \
+  -u $(id -u):$(id -g) \
+  -v $PWD:/app \
+  -p 8000:8000 \
+  statik-docker-alpine:latest $*
+```
+
 ```
 $ cd my-site
-$ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app statik-docker-alpine:latest statik --help
-$ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app statik-docker-alpine:latest statik --quickstart
-$ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app -p 8000:8000 statik-docker-alpine:latest statik -w --host 0.0.0.0
-^C
-$ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app statik-docker-alpine:latest bash
+$ statikdocker statik --help
+$ statikdocker statik --quickstart
+$ statikdocker statik --host 0.0.0.0 --watch
+$ statikdocker bash
 ```
 
 ## Generating Pygments CSS Files
@@ -63,5 +75,5 @@ outputs the CSS to a file named `highlight.css` in your container directory:
 
 ```
 $ cd my-site
-$ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/app statik-docker-alpine:latest pygmentize -S monokai -f html -a .highlight -o highlight.css
+$ statikdocker pygmentize -S monokai -f html -a .highlight -o highlight.css
 ```
